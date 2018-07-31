@@ -1,0 +1,29 @@
+{
+  "name": "@api-components/paper-chip",
+  "description": "A compact material design element that represent and input, attribute, or action.",
+  "version": "2.0.0-preview",
+  "license": "Apache-2.0",
+  "main": "paper-chip.html",
+  "authors": [
+    "Pawel Psztyc",
+    "The Advanced REST client authors <arc@mulesoft.com>"
+  ],
+  "devDependencies": {
+    "@polymer/gen-typescript-declarations": "^1.1.1"
+  },
+  "private": false,
+  "scripts": {
+    "lint": "polymer lint paper-chip.html",
+    "test-sauce": "polymer test --plugin sauce --job-name \"paper-chip:local-test\"",
+    "test": "polymer test --plugin local",
+    "update-types": "gen-typescript-declarations --deleteExisting --outDir ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/advanced-rest-client/paper-chip.git"
+  },
+  "bugs": {
+    "url": "https://github.com/advanced-rest-client/paper-chip/issues",
+    "email": "arc@mulesoft.com"
+  }
+}
