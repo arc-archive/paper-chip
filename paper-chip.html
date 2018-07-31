@@ -13,9 +13,12 @@
       display: inline-block;
       outline: none;
       cursor: default;
+      margin: 4px;
+      box-sizing: border-box;
+      @apply --paper-chip;
     }
 
-    .content {
+    .container {
       border-radius: 16px;
       background-color: var(--paper-chip-background-color, rgba(35, 47, 52, 0.12));
       height: inherit;
@@ -26,16 +29,16 @@
       user-select: none;
       @apply --layout-horizontal;
       @apply --layout-center;
-      @apply --paper-chip;
       @apply --shadow-transition;
+      @apply --paper-chip-container;
     }
 
-    :host([focused]) .content {
+    :host([focused]) .container {
       @apply --shadow-elevation-2dp;
       background-color: var(--paper-chip-focused-background-color, #D6D6D6);
     }
 
-    :host([active]) .content {
+    :host([active]) .container {
       background-color: var(--paper-chip-active-background-color, #cdcdcd);
     }
 
@@ -51,7 +54,7 @@
     .icon ::slotted([slot=icon]) {
       border-radius: 50%;
       margin: 4px 0 4px 6px;
-      color: #666666;
+      color: var(--paper-chip-icon-color, #666666);
     }
 
     .label {
@@ -59,6 +62,7 @@
       padding: 0px 8px;
       margin-left: 12px;
       margin-right: 12px;
+      color: var(--paper-chip-label-color, #232F34);
       @apply --arc-font-body2;
     }
 
@@ -77,18 +81,18 @@
     .close {
       width: 16px;
       height: 16px;
-      background-color: #666666;
-      color: #dfdfdf;
+      background-color: var(--paper-chip-icon-close-background-color, #666666);
+      color: var(--paper-chip-icon-close-color, #dfdfdf);
       border-radius: 50%;
       margin-right: 6px;
       cursor: pointer;
     }
     </style>
-    <div class$="content [[_computeContainerClass(_hasIconNode, removable)]]">
+    <div class$="container [[_computeContainerClass(_hasIconNode, removable)]]">
       <span class="icon"><slot name="icon"></slot></span>
       <span class="label"><slot id="labelSlot"></slot></span>
       <template is="dom-if" if="[[removable]]">
-        <iron-icon class="close" icon="clear" on-click="_removeHandler"></iron-icon>
+        <iron-icon class="close" icon="[[removeIcon]]" on-click="_removeHandler"></iron-icon>
       </template>
     </div>
   </template>
@@ -98,6 +102,26 @@
    *
    * A compact material design element that represent and input, attribute, or action.
    *
+   * A chip contains a label and optionally an icon and remove icon.
+   *
+   * Remove icon is predefined. However icon can be any HTML element with
+   * `slot="icon"` attribute. Per material design guidelines the icon is rounded.
+   *
+   * ## Example
+   *
+   * ```html
+   * <paper-chip removable>
+   *  <iron-icon icon="maps:directions-bike" slot="icon"></iron-icon>
+   *  Biking
+   * </paper-chip>
+   * ```
+   *
+   * The "Bliking" is the label rendered next to the icon. The chip also renders
+   * built-in remove icon. Clicking on the icon dispatches `chip-removed`
+   * custom event only. It does not remove the chip from the document as the
+   * application logic might use different ways of removing elements from dom
+   * than web platform APIs.
+   *
    * ## Styling
    *
    * `<paper-chip>` provides the following custom properties and mixins for styling:
@@ -105,26 +129,35 @@
    * Custom property | Description | Default
    * ----------------|-------------|----------
    * `--paper-chip` | Mixin applied to this elment | `{}`
+   * `--paper-chip-container` | Mixin applied to chip container | `{}`
+   * `--paper-chip-background-color` | Chip background color | `rgba(35, 47, 52, 0.12)`
+   * `--paper-chip-focused-background-color` | Background color when focused | `#D6D6D6`
+   * `--paper-chip-active-background-color` | Background color when toggle is active | `#cdcdcd`
+   * `--paper-chip-icon-color` | Color of the icon | `#666666`
+   * `--paper-chip-label-color` | Color of the label | `#232F34`
+   * `--paper-chip-icon-close-color` | Color of the close icon | `#dfdfdf`
+   * `--paper-chip-icon-close-background-color` | Background color of the close icon | `#666666`
+   *
    *
    * @customElement
    * @polymer
    * @demo demo/index.html
-   * @memberof ApiElements
+   * @memberof UiElements
    */
   class PaperChip extends Polymer.mixinBehaviors(
     [Polymer.IronControlState, Polymer.IronButtonState], Polymer.Element) {
-    static get is() {
-      return 'paper-chip';
-    }
+    static get is() { return 'paper-chip'; }
     static get properties() {
       return {
         /**
          * If set the chip can be removed.
+         * The element does not remove itself from the DOM. It rather dispatch
+         * `chip-removed` custom event to inform parent element about the action.
          */
         removable: Boolean,
         /**
          * A name of the icon to render when `removable` property is set.
-         * By default it referes to Polymer's default icons library, to
+         * By default it referes to Polymer's default icons library, to the
          * `clear` icon. You must include this library into your document.
          * You can also use whatever other icons library.
          */
@@ -136,8 +169,10 @@
         _hasIconNode: Boolean
       };
     }
-
-    get iconSlot() {
+    /**
+     * @return {HTMLElement} Reference to the icon slot element.
+     */
+    get _iconSlot() {
       return this.shadowRoot.querySelector('slot[name="icon"]');
     }
 
@@ -152,7 +187,7 @@
         this.setAttribute('tabindex', '0');
       }
       this._iconObserver = new Polymer.FlattenedNodesObserver(
-        this.iconSlot, () => this._detectHasIcon());
+        this._iconSlot, () => this._detectHasIcon());
       this.addEventListener('keydown', this._keyDownHandler);
     }
 
@@ -161,7 +196,12 @@
       this._iconObserver.disconnect();
       this.removeEventListener('keydown', this._keyDownHandler);
     }
-
+    /**
+     * Handler for remove icon click event.
+     * Cancels the event and calls `remove()`
+     *
+     * @param {ClickEvent} e
+     */
     _removeHandler(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -172,7 +212,7 @@
      * Dispatches `chip-remove` custom event to inform application
      * that the user requested to remove the item.
      *
-     * Note, this does not check for `removable` property to be set.
+     * Note, this does not check if `removable` is set.
      */
     remove() {
       this.dispatchEvent(new CustomEvent('chip-removed', {
@@ -187,7 +227,7 @@
      * node observer.
      */
     _detectHasIcon() {
-      const nodes = this.iconSlot.assignedNodes()
+      const nodes = this._iconSlot.assignedNodes()
         .filter((node) => node.nodeType === Node.ELEMENT_NODE);
       this._hasIconNode = !!nodes.length;
     }
@@ -215,6 +255,14 @@
         this.remove();
       }
     }
+
+    /**
+     * Dispatched when the user clicked on "remove" button or when `remove()`
+     * function is called.
+     * The event bubbles through shadow DOM.
+     *
+     * @event chip-removed
+     */
   }
   window.customElements.define(PaperChip.is, PaperChip);
   </script>

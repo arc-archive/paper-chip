@@ -35,7 +35,7 @@
 
       .avatar {
         background-color: red;
-        color: #fff;
+        color: #fff !important;
         width: 24px;
         height: 24px;
         vertical-align: middle;
@@ -45,11 +45,6 @@
 
       .line paper-chip {
         vertical-align: middle;
-      }
-
-      paper-chip {
-        margin-right: 12px;
-        margin-bottom: 8px;
       }
 
       iron-icon[slot="icon"] {
@@ -81,7 +76,7 @@
       <template is="dom-bind">
         <div class="vertical-section-container centered" role="main">
           <h2>paper-chip component</h2>
-
+          <p>See material design documentation for <a href="https://material.io/design/components/chips.html#usage" target="_blank">chips</a>.</p>
           <h2>Basics</h2>
           <section class="demo line">
             <paper-chip>
@@ -92,21 +87,21 @@
               <span class="avatar" slot="icon">
                 <span>C</span>
               </span>
-              <span>Chip with icon</span>
+              Chip with icon
             </paper-chip>
 
             <paper-chip removable>
               <span class="avatar" slot="icon">
                 <span>R</span>
               </span>
-              <span>Chip that can be removed</span>
+              Chip that can be removed
             </paper-chip>
 
             <paper-chip removable disabled>
               <span class="avatar" slot="icon">
                 <span>D</span>
               </span>
-              <span>Disabled chip</span>
+              Disabled chip
             </paper-chip>
           </section>
 
@@ -114,12 +109,12 @@
           <section class="demo line">
             <paper-chip removable>
               <iron-icon icon="communication:location-on" slot="icon"></iron-icon>
-              <span>Portland</span>
+              Portland
             </paper-chip>
 
             <paper-chip removable>
               <iron-icon icon="maps:directions-bike" slot="icon"></iron-icon>
-              <span>Biking</span>
+              Biking
             </paper-chip>
           </section>
 
@@ -129,7 +124,7 @@
             <div class="wrap-horizontal types">
               <template is="dom-repeat" items="[[types]]" id="typesRepeater">
                 <paper-chip on-click="_toggleTypesChoice">
-                  <span>[[item]]</span>
+                  [[item]]
                 </paper-chip>
               </template>
             </div>
@@ -144,7 +139,7 @@
                   <template is="dom-if" if="[[item.selected]]" restamp>
                     <iron-icon icon="check" slot="icon"></iron-icon>
                   </template>
-                  <span>[[item.label]]</span>
+                  [[item.label]]
                 </paper-chip>
               </template>
             </div>

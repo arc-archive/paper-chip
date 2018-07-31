@@ -10,13 +10,10 @@ A compact material design element that represent and input, attribute, or action
 ```
 <custom-element-demo>
   <template>
-    <link rel="import" href="../paper-styles/typography.html">
     <link rel="import" href="../iron-icon/iron-icon.html">
     <link rel="import" href="../iron-icons/iron-icons.html">
     <link rel="import" href="../iron-icons/communication-icons.html">
     <link rel="import" href="../iron-icons/maps-icons.html">
-    <link rel="import" href="../iron-icons/device-icons.html">
-    <link rel="import" href="../paper-toast/paper-toast.html">
     <link rel="import" href="paper-chip.html">
     <next-code-block></next-code-block>
   </template>
@@ -25,31 +22,31 @@ A compact material design element that represent and input, attribute, or action
 -->
 
 ```html
+<style>
+.avatar {
+  background-color: red;
+  color: #fff !important;
+  width: 24px;
+  height: 24px;
+}
+</style>
 <h2>Basics</h2>
 <section>
-  <paper-chip>
-    <span>Simple chip</span>
-  </paper-chip>
+  <paper-chip>Simple chip</paper-chip>
 
   <paper-chip>
-    <span class="avatar" slot="icon">
-      <span>C</span>
-    </span>
+    <span class="avatar" slot="icon">C</span>
     <span>Chip with icon</span>
   </paper-chip>
 
   <paper-chip removable>
-    <span class="avatar" slot="icon">
-      <span>R</span>
-    </span>
-    <span>Chip that can be removed</span>
+    <span class="avatar" slot="icon">R</span>
+    Chip that can be removed
   </paper-chip>
 
   <paper-chip removable disabled>
-    <span class="avatar" slot="icon">
-      <span>D</span>
-    </span>
-    <span>Disabled chip</span>
+    <span class="avatar" slot="icon">D</span>
+    Disabled chip
   </paper-chip>
 </section>
 
@@ -57,12 +54,12 @@ A compact material design element that represent and input, attribute, or action
 <section>
   <paper-chip removable>
     <iron-icon icon="communication:location-on" slot="icon"></iron-icon>
-    <span>Portland</span>
+    Portland
   </paper-chip>
 
   <paper-chip removable>
     <iron-icon icon="maps:directions-bike" slot="icon"></iron-icon>
-    <span>Biking</span>
+    Biking
   </paper-chip>
 </section>
 ```

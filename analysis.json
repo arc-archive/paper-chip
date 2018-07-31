@@ -1,0 +1,351 @@
+{
+  "schema_version": "1.0.0",
+  "elements": [
+    {
+      "description": "`paper-chip`\n\nA compact material design element that represent and input, attribute, or action.\n\nA chip contains a label and optionally an icon and remove icon.\n\nRemove icon is predefined. However icon can be any HTML element with\n`slot=\"icon\"` attribute. Per material design guidelines the icon is rounded.\n\n## Example\n\n```html\n<paper-chip removable>\n <iron-icon icon=\"maps:directions-bike\" slot=\"icon\"></iron-icon>\n Biking\n</paper-chip>\n```\n\nThe \"Bliking\" is the label rendered next to the icon. The chip also renders\nbuilt-in remove icon. Clicking on the icon dispatches `chip-removed`\ncustom event only. It does not remove the chip from the document as the\napplication logic might use different ways of removing elements from dom\nthan web platform APIs.\n\n## Styling\n\n`<paper-chip>` provides the following custom properties and mixins for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--paper-chip` | Mixin applied to this elment | `{}`\n`--paper-chip-container` | Mixin applied to chip container | `{}`\n`--paper-chip-background-color` | Chip background color | `rgba(35, 47, 52, 0.12)`\n`--paper-chip-focused-background-color` | Background color when focused | `#D6D6D6`\n`--paper-chip-active-background-color` | Background color when toggle is active | `#cdcdcd`\n`--paper-chip-icon-color` | Color of the icon | `#666666`\n`--paper-chip-label-color` | Color of the label | `#232F34`\n`--paper-chip-icon-close-color` | Color of the close icon | `#dfdfdf`\n`--paper-chip-icon-close-background-color` | Background color of the close icon | `#666666`",
+      "summary": "",
+      "path": "paper-chip.html",
+      "properties": [
+        {
+          "name": "_iconSlot",
+          "type": "HTMLElement",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 173,
+              "column": 4
+            },
+            "end": {
+              "line": 175,
+              "column": 5
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "readOnly": true
+            }
+          }
+        },
+        {
+          "name": "removable",
+          "type": "boolean | null | undefined",
+          "description": "If set the chip can be removed.\nThe element does not remove itself from the DOM. It rather dispatch\n`chip-removed` custom event to inform parent element about the action.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 155,
+              "column": 8
+            },
+            "end": {
+              "line": 155,
+              "column": 26
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          }
+        },
+        {
+          "name": "removeIcon",
+          "type": "string | null | undefined",
+          "description": "A name of the icon to render when `removable` property is set.\nBy default it referes to Polymer's default icons library, to the\n`clear` icon. You must include this library into your document.\nYou can also use whatever other icons library.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 162,
+              "column": 8
+            },
+            "end": {
+              "line": 165,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          },
+          "defaultValue": "\"clear\""
+        },
+        {
+          "name": "_hasIconNode",
+          "type": "boolean | null | undefined",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 167,
+              "column": 8
+            },
+            "end": {
+              "line": 167,
+              "column": 29
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          }
+        }
+      ],
+      "methods": [
+        {
+          "name": "connectedCallback",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 182,
+              "column": 4
+            },
+            "end": {
+              "line": 190,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "disconnectedCallback",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 192,
+              "column": 4
+            },
+            "end": {
+              "line": 196,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_removeHandler",
+          "description": "Handler for remove icon click event.\nCancels the event and calls `remove()`",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 203,
+              "column": 4
+            },
+            "end": {
+              "line": 207,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e",
+              "type": "ClickEvent"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "remove",
+          "description": "Dispatches `chip-remove` custom event to inform application\nthat the user requested to remove the item.\n\nNote, this does not check if `removable` is set.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 215,
+              "column": 4
+            },
+            "end": {
+              "line": 220,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_detectHasIcon",
+          "description": "According to material design spec, when there's no icon the\nleft hand side padding should be 12dp. Slotted styling API does now\nallow to detect when there's no contect so it has to be done using\nnode observer.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 227,
+              "column": 4
+            },
+            "end": {
+              "line": 231,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_computeContainerClass",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 233,
+              "column": 4
+            },
+            "end": {
+              "line": 245,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "hasIconNode"
+            },
+            {
+              "name": "removable"
+            }
+          ]
+        },
+        {
+          "name": "_keyDownHandler",
+          "description": "Handler for key down when element is focused.\nRemoves the item when delete key is pressed.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 251,
+              "column": 4
+            },
+            "end": {
+              "line": 255,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e",
+              "type": "KeyboardEvent"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        }
+      ],
+      "staticMethods": [],
+      "demos": [
+        {
+          "url": "demo/index.html",
+          "description": ""
+        }
+      ],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 145,
+          "column": 2
+        },
+        "end": {
+          "line": 264,
+          "column": 3
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "name": "UiElements.PaperChip",
+      "attributes": [
+        {
+          "name": "removable",
+          "description": "If set the chip can be removed.\nThe element does not remove itself from the DOM. It rather dispatch\n`chip-removed` custom event to inform parent element about the action.",
+          "sourceRange": {
+            "start": {
+              "line": 155,
+              "column": 8
+            },
+            "end": {
+              "line": 155,
+              "column": 26
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "remove-icon",
+          "description": "A name of the icon to render when `removable` property is set.\nBy default it referes to Polymer's default icons library, to the\n`clear` icon. You must include this library into your document.\nYou can also use whatever other icons library.",
+          "sourceRange": {
+            "start": {
+              "line": 162,
+              "column": 8
+            },
+            "end": {
+              "line": 165,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        }
+      ],
+      "events": [
+        {
+          "type": "CustomEvent",
+          "name": "chip-removed",
+          "description": "Dispatched when the user clicked on \"remove\" button or when `remove()`\nfunction is called.\nThe event bubbles through shadow DOM.",
+          "metadata": {}
+        }
+      ],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [
+        {
+          "description": "",
+          "name": "icon",
+          "range": {
+            "start": {
+              "line": 90,
+              "column": 25
+            },
+            "end": {
+              "line": 90,
+              "column": 50
+            }
+          }
+        },
+        {
+          "description": "",
+          "name": "",
+          "range": {
+            "start": {
+              "line": 91,
+              "column": 26
+            },
+            "end": {
+              "line": 91,
+              "column": 54
+            }
+          }
+        }
+      ],
+      "tagname": "paper-chip"
+    }
+  ]
+}

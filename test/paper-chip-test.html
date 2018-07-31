@@ -15,16 +15,139 @@
     </template>
   </test-fixture>
 
+  <test-fixture id="Removable">
+    <template>
+      <paper-chip removable>test label</paper-chip>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="WithLabel">
+    <template>
+      <paper-chip>
+        My label
+      </paper-chip>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="WithIcon">
+    <template>
+      <paper-chip>
+        <span class="avatar" slot="icon">C</span>
+        <span>My label</span>
+      </paper-chip>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="FullSet">
+    <template>
+      <paper-chip removable>
+        <span class="avatar" slot="icon">C</span>
+        <span>My label</span>
+      </paper-chip>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="Toggles">
+    <template>
+      <paper-chip removable toggles>test label</paper-chip>
+    </template>
+  </test-fixture>
+
   <script>
   suite('paper-chip', () => {
     let element;
-    setup(() => {
+
+    test('_hasIconNode is not computed', () => {
       element = fixture('Basic');
+      assert.isUndefined(element._hasIconNode);
     });
 
-    test('Initializes the element', () => {
-      assert.ok(element);
+    test('Close icon is not rendered', (done) => {
+      element = fixture('Basic');
+      flush(() => {
+        const node = element.shadowRoot.querySelector('.close');
+        assert.notOk(node);
+        done();
+      });
     });
+
+    test('Adds icon when removable', (done) => {
+      element = fixture('Removable');
+      flush(() => {
+        const node = element.shadowRoot.querySelector('.close');
+        assert.ok(node);
+        done();
+      });
+    });
+
+    test('Container has no additional class names for label only', (done) => {
+      element = fixture('WithLabel');
+      flush(() => {
+        const node = element.shadowRoot.querySelector('.container');
+        assert.isFalse(node.classList.contains('with-remove'));
+        assert.isFalse(node.classList.contains('with-icon'));
+        done();
+      });
+    });
+
+    test('Container has with-remove class for removable', (done) => {
+      element = fixture('Removable');
+      flush(() => {
+        const node = element.shadowRoot.querySelector('.container');
+        assert.isTrue(node.classList.contains('with-remove'));
+        done();
+      });
+    });
+
+    test('Container has with-icon class for icon', (done) => {
+      element = fixture('WithIcon');
+      flush(() => {
+        const node = element.shadowRoot.querySelector('.container');
+        assert.isTrue(node.classList.contains('with-icon'));
+        done();
+      });
+    });
+
+    test('_hasIconNode is computed when icon is set', (done) => {
+      element = fixture('WithIcon');
+      flush(() => {
+        assert.isTrue(element._hasIconNode);
+        done();
+      });
+    });
+
+    test('_hasIconNode is computed when icon is removed', (done) => {
+      element = fixture('WithIcon');
+      flush(() => {
+        const node = element.querySelector('.avatar');
+        node.parentNode.removeChild(node);
+        flush(() => {
+          assert.isFalse(element._hasIconNode);
+          done();
+        });
+      });
+    });
+
+    test('Dospatches `chip-removed` custom event', (done) => {
+      element = fixture('Removable');
+      element.addEventListener('chip-removed', () => done());
+      flush(() => {
+        const node = element.shadowRoot.querySelector('.close');
+        node.click();
+      });
+    });
+
+    test('Chip is not active when removed', (done) => {
+      element = fixture('Toggles');
+      flush(() => {
+        const node = element.shadowRoot.querySelector('.close');
+        node.click();
+        assert.isFalse(element.active);
+        done();
+      });
+    });
+
+    a11ySuite('FullSet');
   });
   </script>
 </body>
