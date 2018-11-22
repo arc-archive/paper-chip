@@ -62,8 +62,23 @@
       padding: 0px 8px;
       margin-left: 12px;
       margin-right: 12px;
-      color: var(--paper-chip-label-color, #232F34);
       @apply --arc-font-body2;
+      color: var(--paper-chip-label-color, #232F34);
+    }
+
+    .label ::slotted([slot]) {
+      @apply --arc-font-body2;
+      color: var(--paper-chip-label-color, #232F34);
+    }
+
+    :host([focused]) ::slotted([slot]),
+    :host([focused]) .label {
+      color: var(--paper-chip-label-focused-color);
+    }
+
+    :host([active]) ::slotted([slot]),
+    :host([active]) .label {
+      color: var(--paper-chip-label-active-color);
     }
 
     .with-icon .label {
@@ -72,10 +87,6 @@
 
     .with-remove .label {
       margin-right: 0;
-    }
-
-    .label ::slotted(*) {
-      color: var(--paper-chip-label-color, #232F34);
     }
 
     .close {
@@ -90,7 +101,7 @@
     </style>
     <div class$="container [[_computeContainerClass(_hasIconNode, removable)]]">
       <span class="icon"><slot name="icon"></slot></span>
-      <span class="label"><slot id="labelSlot"></slot></span>
+      <span class="label"><slot></slot></span>
       <template is="dom-if" if="[[removable]]">
         <iron-icon class="close" icon="[[removeIcon]]" on-click="_removeHandler"></iron-icon>
       </template>
@@ -135,9 +146,10 @@
    * `--paper-chip-active-background-color` | Background color when toggle is active | `#cdcdcd`
    * `--paper-chip-icon-color` | Color of the icon | `#666666`
    * `--paper-chip-label-color` | Color of the label | `#232F34`
+   * `--paper-chip-label-focused-color` | Color of the when focused | ``
+   * `--paper-chip-label-active-color` | Color of the when active | ``
    * `--paper-chip-icon-close-color` | Color of the close icon | `#dfdfdf`
    * `--paper-chip-icon-close-background-color` | Background color of the close icon | `#666666`
-   *
    *
    * @customElement
    * @polymer
@@ -146,7 +158,9 @@
    */
   class PaperChip extends Polymer.mixinBehaviors(
     [Polymer.IronControlState, Polymer.IronButtonState], Polymer.Element) {
-    static get is() { return 'paper-chip'; }
+    static get is() {
+      return 'paper-chip';
+    }
     static get properties() {
       return {
         /**

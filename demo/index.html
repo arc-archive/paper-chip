@@ -68,6 +68,14 @@
         --paper-chip-background-color: #D1C4E9;
         --paper-chip-focused-background-color: #D1C4E9;
       }
+
+      .themed {
+        --paper-chip-background-color: rgb(176, 190, 197);
+        --paper-chip-icon-color: yellow;
+        --paper-chip-label-color: red;
+        --paper-chip-label-focused-color: pink;
+        --paper-chip-focused-background-color: #fff;
+      }
       </style>
     </custom-style>
   </head>
@@ -162,6 +170,23 @@
                 <iron-icon icon="communication:clear-all" slot="icon"></iron-icon>
                 <span>Clear all</span>
               </paper-chip>
+            </div>
+          </section>
+
+          <h2>Themed chips</h2>
+          <section class="demo">
+            <div class="wrap-horizontal actions">
+              <div class="themed">
+                <paper-chip>
+                  <iron-icon icon="device:brightness-low" slot="icon"></iron-icon>
+                  Styled text child
+                </paper-chip>
+
+                <paper-chip>
+                  <iron-icon icon="device:brightness-low" slot="icon"></iron-icon>
+                  <span>Styled element child</span>
+                </paper-chip>
+              </div>
             </div>
           </section>
         </div>
