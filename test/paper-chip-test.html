@@ -4,9 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
   <title>paper-chip test</title>
+
   <script src="../../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  <script src="../../../wct-browser-legacy/browser.js"></script>
-  <script type="module" src="../paper-chip.js"></script>
+  <script src="../../../@polymer/test-fixture/test-fixture.js"></script>
+  <script src="../../../mocha/mocha.js"></script>
+  <script src="../../../chai/chai.js"></script>
+  <script src="../../../wct-mocha/wct-mocha.js"></script>
+
 </head>
 <body>
   <test-fixture id="Basic">
@@ -55,7 +59,8 @@
 
   <script type="module">
   import '../paper-chip.js';
-  import { a11ySuite } from '../../../wct-browser-legacy/a11ySuite.js';
+  import sinon from '../../../sinon/pkg/sinon-esm.js';
+  // import { a11ySuite } from '../../../wct-browser-legacy/a11ySuite.js';
   suite('paper-chip', () => {
     let element;
 
@@ -149,7 +154,40 @@
       });
     });
 
-    a11ySuite('FullSet');
+    // a11ySuite('FullSet');
+  });
+
+  suite('_keyDownHandler()', () => {
+    let element;
+    setup((done) => {
+      element = fixture('Removable');
+      flush(() => done());
+    });
+
+    test('Calls remove() when backspace key', () => {
+      const spy = sinon.spy(element, 'remove');
+      element._keyDownHandler({
+        key: 'Backspace'
+      });
+      assert.isTrue(spy.called);
+    });
+
+    test('Calls remove() when backspace code', () => {
+      const spy = sinon.spy(element, 'remove');
+      element._keyDownHandler({
+        code: 'Backspace'
+      });
+      assert.isTrue(spy.called);
+    });
+
+    test('Ignores event when not removable', () => {
+      element.removable = false;
+      const spy = sinon.spy(element, 'remove');
+      element._keyDownHandler({
+        code: 'Backspace'
+      });
+      assert.isFalse(spy.called);
+    });
   });
   </script>
 </body>

@@ -117,12 +117,16 @@ class PaperChip extends mixinBehaviors(
       padding: 0px 8px;
       margin-left: 12px;
       margin-right: 12px;
-      @apply --arc-font-body2;
+      font-size: var(--arc-font-body2-font-size);
+      font-weight: var(--arc-font-body2-font-weight);
+      line-height: var(--arc-font-body2-line-height);
       color: var(--paper-chip-label-color, #232F34);
     }
 
     .label ::slotted([slot]) {
-      @apply --arc-font-body2;
+      font-size: var(--arc-font-body2-font-size);
+      font-weight: var(--arc-font-body2-font-weight);
+      line-height: var(--arc-font-body2-line-height);
       color: var(--paper-chip-label-color, #232F34);
     }
 
@@ -162,10 +166,6 @@ class PaperChip extends mixinBehaviors(
       </template>
     </div>
 `;
-  }
-
-  static get is() {
-    return 'paper-chip';
   }
   static get properties() {
     return {
@@ -284,4 +284,4 @@ class PaperChip extends mixinBehaviors(
    * @event chip-removed
    */
 }
-window.customElements.define(PaperChip.is, PaperChip);
+window.customElements.define('paper-chip', PaperChip);
