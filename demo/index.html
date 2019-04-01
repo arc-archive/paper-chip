@@ -1,23 +1,22 @@
-<!doctype html>
-<html lang="en">
-  <head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
     <title>api-request-editor demo</title>
-    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-    <link rel="import" href="../../shadycss/apply-shim.html">
-    <link rel="import" href="../../polymer/lib/elements/custom-style.html">
-    <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../../paper-styles/typography.html">
-    <link rel="import" href="../../iron-icon/iron-icon.html">
-    <link rel="import" href="../../iron-icons/iron-icons.html">
-    <link rel="import" href="../../iron-icons/communication-icons.html">
-    <link rel="import" href="../../iron-icons/maps-icons.html">
-    <link rel="import" href="../../iron-icons/device-icons.html">
-    <link rel="import" href="../../paper-toast/paper-toast.html">
-    <link rel="import" href="../paper-chip.html">
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script type="module" src="../../../@webcomponents/shadycss/entrypoints/apply-shim.js"></script>
+    <script type="module" src="../../../@polymer/polymer/lib/elements/custom-style.js"></script>
+    <script type="module" src="../../../@polymer/polymer/lib/elements/dom-bind.js"></script>
+    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
+    <script type="module" src="../../../@polymer/paper-styles/typography.js"></script>
+    <script type="module" src="../../../@polymer/iron-icon/iron-icon.js"></script>
+    <script type="module" src="../../../@polymer/iron-icons/iron-icons.js"></script>
+    <script type="module" src="../../../@polymer/iron-icons/communication-icons.js"></script>
+    <script type="module" src="../../../@polymer/iron-icons/maps-icons.js"></script>
+    <script type="module" src="../../../@polymer/iron-icons/device-icons.js"></script>
+    <script type="module" src="../../../@polymer/paper-toast/paper-toast.js"></script>
+    <script type="module" src="../paper-chip.js"></script>
+
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
       :root {
@@ -98,14 +97,14 @@
               Chip with icon
             </paper-chip>
 
-            <paper-chip removable>
+            <paper-chip removable="">
               <span class="avatar" slot="icon">
                 <span>R</span>
               </span>
               Chip that can be removed
             </paper-chip>
 
-            <paper-chip removable disabled>
+            <paper-chip removable="" disabled="">
               <span class="avatar" slot="icon">
                 <span>D</span>
               </span>
@@ -115,12 +114,12 @@
 
           <h2>Input chips</h2>
           <section class="demo line">
-            <paper-chip removable>
+            <paper-chip removable="">
               <iron-icon icon="communication:location-on" slot="icon"></iron-icon>
               Portland
             </paper-chip>
 
-            <paper-chip removable>
+            <paper-chip removable="">
               <iron-icon icon="maps:directions-bike" slot="icon"></iron-icon>
               Biking
             </paper-chip>
@@ -143,8 +142,8 @@
             <h3>Choose amenities</h3>
             <div class="wrap-horizontal">
               <template is="dom-repeat" items="[[amenities]]" id="amenitiesRepeater">
-                <paper-chip on-click="_toggleAmenitiesFilter" toggles>
-                  <template is="dom-if" if="[[item.selected]]" restamp>
+                <paper-chip on-click="_toggleAmenitiesFilter" toggles="">
+                  <template is="dom-if" if="[[item.selected]]" restamp="">
                     <iron-icon icon="check" slot="icon"></iron-icon>
                   </template>
                   [[item.label]]
@@ -196,7 +195,7 @@
         <paper-toast id="clearAction" text="Clearing all actions"></paper-toast>
       </template>
     </dom-bind>
-    <script>
+    <script type="module">
     (function(app) {
       window.addEventListener('chip-removed', (e) => {
         e.target.parentNode.removeChild(e.target);

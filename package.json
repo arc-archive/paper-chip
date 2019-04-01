@@ -1,29 +1,53 @@
 {
-  "name": "@advanced-rest-client/paper-chip",
   "description": "A compact material design element that represent and input, attribute, or action.",
-  "version": "2.0.1",
+  "keywords": [
+    "api-components"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/advanced-rest-client/paper-chip.git"
+  },
+  "name": "@advanced-rest-client/paper-chip",
+  "version": "3.0.0-preview.1",
   "license": "Apache-2.0",
-  "main": "paper-chip.html",
+  "main": "paper-chip.js",
   "authors": [
     "Pawel Psztyc",
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "devDependencies": {
-    "@polymer/gen-typescript-declarations": "^1.5.1"
+    "@polymer/gen-typescript-declarations": "^1.5.1",
+    "@polymer/iron-demo-helpers": "^3.0.0",
+    "@polymer/iron-component-page": "^4.0.0",
+    "@polymer/iron-test-helpers": "^3.0.0",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "@polymer/iron-icons": "^3.0.0",
+    "@polymer/paper-toast": "^3.0.0",
+    "@polymer/test-fixture": "^4.0.2",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "sinon": "^7.2.3",
+    "wct-mocha": "^1.0.0"
   },
-  "private": false,
   "scripts": {
     "lint": "polymer lint paper-chip.html",
     "test-sauce": "polymer test --plugin sauce --job-name \"paper-chip:local-test\"",
     "test": "polymer test --plugin local",
     "update-types": "gen-typescript-declarations --deleteExisting --outDir ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/advanced-rest-client/paper-chip.git"
-  },
   "bugs": {
     "url": "https://github.com/advanced-rest-client/paper-chip/issues",
     "email": "arc@mulesoft.com"
+  },
+  "contributors": [
+    "Pawel Psztyc",
+    "The Advanced REST client authors <arc@mulesoft.com>"
+  ],
+  "dependencies": {
+    "@polymer/polymer": "^3.0.0",
+    "@polymer/paper-icon-button": "^3.0.0",
+    "@polymer/paper-styles": "^3.0.0",
+    "@polymer/iron-flex-layout": "^3.0.0",
+    "@polymer/iron-behaviors": "^3.0.0"
   }
 }
