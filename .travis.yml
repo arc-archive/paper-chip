@@ -1,9 +1,9 @@
 language: node_js
-node_js: 8
+node_js: stable
 sudo: required
 before_script: npm install -g polymer-cli @advanced-rest-client/wct-istanbub
 addons:
-  firefox: latest
+  # firefox: latest
   apt:
     sources:
       - google-chrome
@@ -11,7 +11,7 @@ addons:
       - google-chrome-stable
   sauce_connect: true
 script:
-  - npm run lint
+  # - npm run lint
   - xvfb-run polymer test --module-resolution=node --npm --plugin local
   - >-
     if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then polymer test
