@@ -5,17 +5,14 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   paper-chip.html
+ *   paper-chip.js
  */
 
-/// <reference path="../polymer/types/polymer-element.d.ts" />
-/// <reference path="../polymer/types/lib/elements/dom-if.d.ts" />
-/// <reference path="../polymer/types/lib/legacy/class.d.ts" />
-/// <reference path="../polymer/types/lib/utils/flattened-nodes-observer.d.ts" />
-/// <reference path="../iron-behaviors/iron-control-state.d.ts" />
-/// <reference path="../iron-behaviors/iron-button-state.d.ts" />
-/// <reference path="../paper-styles/shadow.d.ts" />
-/// <reference path="../paper-icon-button/paper-icon-button.d.ts" />
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+// tslint:disable:no-any describes the API as best we are able today
+
+export {PaperChip};
 
 declare namespace UiElements {
 
@@ -50,8 +47,6 @@ declare namespace UiElements {
    *
    * Custom property | Description | Default
    * ----------------|-------------|----------
-   * `--paper-chip` | Mixin applied to this elment | `{}`
-   * `--paper-chip-container` | Mixin applied to chip container | `{}`
    * `--paper-chip-background-color` | Chip background color | `rgba(35, 47, 52, 0.12)`
    * `--paper-chip-focused-background-color` | Background color when focused | `#D6D6D6`
    * `--paper-chip-active-background-color` | Background color when toggle is active | `#cdcdcd`
@@ -114,6 +109,9 @@ declare namespace UiElements {
   }
 }
 
-interface HTMLElementTagNameMap {
-  "paper-chip": UiElements.PaperChip;
+declare global {
+
+  interface HTMLElementTagNameMap {
+    "paper-chip": UiElements.PaperChip;
+  }
 }
