@@ -51,7 +51,7 @@ import '../../@polymer/paper-icon-button/paper-icon-button.js';
  * @demo demo/index.html
  * @memberof UiElements
  */
-class PaperChip extends mixinBehaviors(
+export class PaperChip extends mixinBehaviors(
   [IronControlState, IronButtonState], PolymerElement) {
   static get template() {
     return html`
