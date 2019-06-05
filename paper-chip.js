@@ -32,7 +32,7 @@ import '../../@polymer/paper-icon-button/paper-icon-button.js';
  *
  * ## Styling
  *
- * `<paper-chip>` provides the following custom properties and mixins for styling:
+ * `<paper-chip>` provides the following custom properties for styling:
  *
  * Custom property | Description | Default
  * ----------------|-------------|----------
@@ -45,6 +45,15 @@ import '../../@polymer/paper-icon-button/paper-icon-button.js';
  * `--paper-chip-label-active-color` | Color of the when active | ``
  * `--paper-chip-icon-close-color` | Color of the close icon | `#dfdfdf`
  * `--paper-chip-icon-close-background-color` | Background color of the close icon | `#666666`
+ *
+ * `<paper-chip>` provides the following [parts](https://www.w3.org/TR/css-shadow-parts-1/):
+ *
+ * Part name | Description
+ * ----------------|-------------
+ * `paper-chip-container` | Styles applied to the chip container
+ * `paper-chip-icon` | Styles applied to the icon container
+ * `paper-chip-label` | Styles applied to the label container
+ * `paper-chip-remove` | Styles applied to the delete icon
  *
  * @customElement
  * @polymer
@@ -158,11 +167,11 @@ export class PaperChip extends mixinBehaviors(
       cursor: pointer;
     }
     </style>
-    <div class\$="container [[_computeContainerClass(_hasIconNode, removable)]]">
-      <span class="icon"><slot name="icon"></slot></span>
-      <span class="label"><slot></slot></span>
+    <div part="paper-chip-container" class\$="container [[_computeContainerClass(_hasIconNode, removable)]]">
+      <span part="paper-chip-icon" class="icon"><slot name="icon"></slot></span>
+      <span part="paper-chip-label" class="label"><slot></slot></span>
       <template is="dom-if" if="[[removable]]">
-        <iron-icon class="close" icon="[[removeIcon]]" on-click="_removeHandler"></iron-icon>
+        <iron-icon part="paper-chip-remove" class="close" icon="[[removeIcon]]" on-click="_removeHandler"></iron-icon>
       </template>
     </div>
 `;

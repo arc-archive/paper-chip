@@ -115,3 +115,28 @@ open http://127.0.0.1:<port>/demo/
 ```sh
 polymer test --npm
 ```
+
+## Styling
+
+`<paper-chip>` provides the following custom properties for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-chip-background-color` | Chip background color | `rgba(35, 47, 52, 0.12)`
+`--paper-chip-focused-background-color` | Background color when focused | `#D6D6D6`
+`--paper-chip-active-background-color` | Background color when toggle is active | `#cdcdcd`
+`--paper-chip-icon-color` | Color of the icon | `#666666`
+`--paper-chip-label-color` | Color of the label | `#232F34`
+`--paper-chip-label-focused-color` | Color of the when focused | ``
+`--paper-chip-label-active-color` | Color of the when active | ``
+`--paper-chip-icon-close-color` | Color of the close icon | `#dfdfdf`
+`--paper-chip-icon-close-background-color` | Background color of the close icon | `#666666`
+
+`<paper-chip>` provides the following [parts](https://www.w3.org/TR/css-shadow-parts-1/):
+
+Part name | Description
+----------------|-------------
+`paper-chip-container` | Styles applied to the chip container
+`paper-chip-icon` | Styles applied to the icon container
+`paper-chip-label` | Styles applied to the label container
+`paper-chip-remove` | Styles applied to the delete icon
