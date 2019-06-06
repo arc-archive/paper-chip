@@ -2,245 +2,108 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
     <title>api-request-editor demo</title>
-    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script type="module" src="../../../@webcomponents/shadycss/entrypoints/apply-shim.js"></script>
-    <script type="module" src="../../../@polymer/polymer/lib/elements/custom-style.js"></script>
-    <script type="module" src="../../../@polymer/polymer/lib/elements/dom-bind.js"></script>
-    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
-    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
-    <script type="module" src="../../../@polymer/paper-styles/typography.js"></script>
-    <script type="module" src="../../../@polymer/iron-icon/iron-icon.js"></script>
-    <script type="module" src="../../../@polymer/iron-icons/iron-icons.js"></script>
-    <script type="module" src="../../../@polymer/iron-icons/communication-icons.js"></script>
-    <script type="module" src="../../../@polymer/iron-icons/maps-icons.js"></script>
-    <script type="module" src="../../../@polymer/iron-icons/device-icons.js"></script>
-    <script type="module" src="../../../@polymer/paper-toast/paper-toast.js"></script>
-    <script type="module" src="../paper-chip.js"></script>
+    <script src="../../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
-    <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles">
-      :root {
-        --arc-font-body2: {
-          @apply --paper-font-body2;
-        };
-      }
-      h1 {
-        @apply --paper-font-headline;
-      }
+    <style>
+    html {
+      --arc-font-body2-font-size: 14px;
+      --arc-font-body2-font-weight: 500;
+      --arc-font-body2-line-height: 24px;
 
-      h2 {
-        @apply --paper-font-title;
-      }
+      font-size: 15px;
+    }
 
-      .avatar {
-        background-color: red;
-        color: #fff !important;
-        width: 24px;
-        height: 24px;
-        vertical-align: middle;
-        @apply --layout-horizontal;
-        @apply --layout-center-center;
-      }
+    h1 {
+      -webkit-font-smoothing: var(--arc-font-font-smoothing);
+      font-size: 34px;
+      font-weight: 400;
+      letter-spacing: -.01em;
+      line-height: 40px;
+    }
 
-      .line paper-chip {
-        vertical-align: middle;
-      }
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 28px;
+    }
 
-      iron-icon[slot="icon"] {
-        width: 20px;
-        height: 20px;
-      }
+    h3 {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+    }
 
-      .wrap-horizontal {
-        @apply --layout-horizontal;
-        @apply --layout-center;
-        @apply --layout-wrap;
-      }
+    .demo {
+      margin-bottom: 40px;
+    }
 
-      .types paper-chip,
-      .actions paper-chip {
-        cursor: pointer;
-      }
+    .avatar {
+      background-color: red;
+      color: #fff !important;
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
 
-      .iron-selected {
-        --paper-chip-label-color: #673AB7;
-        --paper-chip-background-color: #D1C4E9;
-        --paper-chip-focused-background-color: #D1C4E9;
-      }
+    .line paper-chip {
+      vertical-align: middle;
+    }
 
-      .themed {
-        --paper-chip-background-color: rgb(176, 190, 197);
-        --paper-chip-icon-color: yellow;
-        --paper-chip-label-color: red;
-        --paper-chip-label-focused-color: pink;
-        --paper-chip-focused-background-color: #fff;
-      }
-      </style>
-    </custom-style>
+    iron-icon[slot="icon"] {
+      width: 20px;
+      height: 20px;
+    }
+
+    .wrap-horizontal {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .types paper-chip,
+    .actions paper-chip {
+      cursor: pointer;
+    }
+
+    .iron-selected {
+      --paper-chip-label-color: #673AB7;
+      --paper-chip-background-color: #D1C4E9;
+      --paper-chip-focused-background-color: #D1C4E9;
+    }
+
+    .themed {
+      --paper-chip-background-color: rgb(176, 190, 197);
+      --paper-chip-icon-color: yellow;
+      --paper-chip-label-color: red;
+      --paper-chip-label-focused-color: pink;
+      --paper-chip-focused-background-color: #fff;
+    }
+
+    .themed-parts paper-chip::part(paper-chip-container) {
+      background-color: #CDDC39;
+      padding: 4px;
+    }
+    .themed-parts paper-chip::part(paper-chip-label) {
+      color: black;
+    }
+    .themed-parts paper-chip::part(paper-chip-remove) {
+      color: white;
+      background-color: #F44336;
+    }
+    </style>
   </head>
   <body>
-    <dom-bind id="demo">
-      <template is="dom-bind">
-        <div class="vertical-section-container centered" role="main">
-          <h2>paper-chip component</h2>
-          <p>See material design documentation for <a href="https://material.io/design/components/chips.html#usage" target="_blank">chips</a>.</p>
-          <h2>Basics</h2>
-          <section class="demo line">
-            <paper-chip>
-              <span>Simple chip</span>
-            </paper-chip>
+    <h1>paper-chip component</h1>
+    <p>See material design documentation for <a href="https://material.io/design/components/chips.html#usage" target="_blank">chips</a>.</p>
 
-            <paper-chip>
-              <span class="avatar" slot="icon">
-                <span>C</span>
-              </span>
-              Chip with icon
-            </paper-chip>
+    <div id="demo"></div>
 
-            <paper-chip removable="">
-              <span class="avatar" slot="icon">
-                <span>R</span>
-              </span>
-              Chip that can be removed
-            </paper-chip>
-
-            <paper-chip removable="" disabled="">
-              <span class="avatar" slot="icon">
-                <span>D</span>
-              </span>
-              Disabled chip
-            </paper-chip>
-          </section>
-
-          <h2>Input chips</h2>
-          <section class="demo line">
-            <paper-chip removable="">
-              <iron-icon icon="communication:location-on" slot="icon"></iron-icon>
-              Portland
-            </paper-chip>
-
-            <paper-chip removable="">
-              <iron-icon icon="maps:directions-bike" slot="icon"></iron-icon>
-              Biking
-            </paper-chip>
-          </section>
-
-          <h2>Choice chips</h2>
-          <section class="demo">
-            <h3>Select type</h3>
-            <div class="wrap-horizontal types">
-              <template is="dom-repeat" items="[[types]]" id="typesRepeater">
-                <paper-chip on-click="_toggleTypesChoice">
-                  [[item]]
-                </paper-chip>
-              </template>
-            </div>
-          </section>
-
-          <h2>Filter chips</h2>
-          <section class="demo">
-            <h3>Choose amenities</h3>
-            <div class="wrap-horizontal">
-              <template is="dom-repeat" items="[[amenities]]" id="amenitiesRepeater">
-                <paper-chip on-click="_toggleAmenitiesFilter" toggles="">
-                  <template is="dom-if" if="[[item.selected]]" restamp="">
-                    <iron-icon icon="check" slot="icon"></iron-icon>
-                  </template>
-                  [[item.label]]
-                </paper-chip>
-              </template>
-            </div>
-          </section>
-
-          <h2>Action chips</h2>
-          <section class="demo">
-            <div class="wrap-horizontal actions">
-              <paper-chip on-click="_handleAction" data-action="brightness">
-                <iron-icon icon="device:brightness-low" slot="icon"></iron-icon>
-                <span>Turn on lights</span>
-              </paper-chip>
-
-              <paper-chip on-click="_handleAction" data-action="alarm">
-                <iron-icon icon="alarm" slot="icon"></iron-icon>
-                <span>Set alarm</span>
-              </paper-chip>
-
-              <paper-chip on-click="_handleAction" data-action="clear">
-                <iron-icon icon="communication:clear-all" slot="icon"></iron-icon>
-                <span>Clear all</span>
-              </paper-chip>
-            </div>
-          </section>
-
-          <h2>Themed chips</h2>
-          <section class="demo">
-            <div class="wrap-horizontal actions">
-              <div class="themed">
-                <paper-chip>
-                  <iron-icon icon="device:brightness-low" slot="icon"></iron-icon>
-                  Styled text child
-                </paper-chip>
-
-                <paper-chip>
-                  <iron-icon icon="device:brightness-low" slot="icon"></iron-icon>
-                  <span>Styled element child</span>
-                </paper-chip>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <paper-toast id="brightnessAction" text="Turing lights on"></paper-toast>
-        <paper-toast id="alarmAction" text="Setting the alarm"></paper-toast>
-        <paper-toast id="clearAction" text="Clearing all actions"></paper-toast>
-      </template>
-    </dom-bind>
-    <script type="module">
-    (function(app) {
-      window.addEventListener('chip-removed', (e) => {
-        e.target.parentNode.removeChild(e.target);
-      });
-
-      app.amenities = [
-        {label: 'Elevator'},
-        {label: 'Washer / Dryer'},
-        {label: 'Fireplace'},
-        {label: 'Wheelchair access'},
-        {label: 'Dogs ok'},
-        {label: 'Cats ok'}
-      ];
-
-      app.types = [
-        'Extra soft',
-        'Soft',
-        'Medium',
-        'Hard',
-        'Extra hard'
-      ];
-
-      app._toggleAmenitiesFilter = function(e) {
-        const repeater = document.getElementById('amenitiesRepeater');
-        const model = repeater.modelForElement(e.target);
-        model.set('item.selected', !model.get('item.selected'));
-      };
-
-      app._toggleTypesChoice = function(e) {
-        const selectedClass = 'iron-selected';
-        const selected = document.querySelector('.types .' + selectedClass);
-        if (selected) {
-          selected.classList.remove(selectedClass);
-        }
-        e.currentTarget.classList.add(selectedClass);
-      };
-      app._handleAction = function(e) {
-        const action = e.currentTarget.dataset.action;
-        if (!action) {
-          return;
-        }
-        const toast = document.getElementById(action + 'Action');
-        toast.opened = true;
-      };
-    })(document.getElementById('demo'));
+    <script type="module" src="index.js"></script>
   </script>
   </body>
 </html>
