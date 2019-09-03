@@ -1,7 +1,7 @@
 {
   "name": "@advanced-rest-client/paper-chip",
   "description": "A compact material design element that represent and input, attribute, or action.",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "license": "Apache-2.0",
   "main": "paper-chip.js",
   "keywords": [
