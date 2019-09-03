@@ -15,12 +15,12 @@ class DemoPage {
     this._handleAction = this._handleAction.bind(this);
 
     this.amenities = [
-      {label: 'Elevator'},
-      {label: 'Washer / Dryer'},
-      {label: 'Fireplace'},
-      {label: 'Wheelchair access'},
-      {label: 'Dogs ok'},
-      {label: 'Cats ok'}
+      { label: 'Elevator' },
+      { label: 'Washer / Dryer' },
+      { label: 'Fireplace' },
+      { label: 'Wheelchair access' },
+      { label: 'Dogs ok' },
+      { label: 'Cats ok' }
     ];
   }
 

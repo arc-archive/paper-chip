@@ -231,13 +231,27 @@ export class PaperChip extends LitElement {
     }
   }
 
+  _iconSlotTemplate() {
+    return html`<span part="paper-chip-icon" class="icon"><slot name="icon"></slot></span>`;
+  }
+
+  _removeTemplate() {
+    if (!this.removable) {
+      return '';
+    }
+    return html`<iron-icon
+      part="paper-chip-remove"
+      class="close"
+      icon="${this.removeIcon}"
+      @click="${this._removeHandler}"></iron-icon>`;
+  }
+
   render() {
     const containerClass = this._computeContainerClass(this._hasIconNode, this.removable);
     return html`<div part="paper-chip-container" class="container ${containerClass}">
-      <span part="paper-chip-icon" class="icon"><slot name="icon"></slot></span>
+      ${this._iconSlotTemplate()}
       <span part="paper-chip-label" class="label"><slot></slot></span>
-      ${this.removable ? html`<iron-icon part="paper-chip-remove"
-        class="close" icon="${this.removeIcon}" @click="${this._removeHandler}"></iron-icon>` : ''}
+      ${this._removeTemplate()}
     </div>`;
   }
   /**
@@ -256,7 +270,9 @@ export class PaperChip extends LitElement {
   }
 
   connectedCallback() {
-    super.connectedCallback();
+    if (super.connectedCallback) {
+      super.connectedCallback();
+    }
     if (!this.hasAttribute('tabindex')) {
       this.setAttribute('tabindex', '0');
     }
@@ -275,7 +291,9 @@ export class PaperChip extends LitElement {
   }
 
   disconnectedCallback() {
-    super.disconnectedCallback();
+    if (super.disconnectedCallback) {
+      super.disconnectedCallback();
+    }
     this.removeEventListener('keydown', this._keyDownHandler);
     this.removeEventListener('focus', this._focusBlurHandler);
     this.removeEventListener('blur', this._focusBlurHandler);
