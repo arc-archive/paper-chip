@@ -8,6 +8,8 @@
 
 A compact material design element that represent and input, attribute, or action.
 
+**This project is deprecated.** Please, use [anypoint-chip](https://github.com/anypoint-web-components/anypoint-chip) instead.
+
 ### Example
 
 ```html
